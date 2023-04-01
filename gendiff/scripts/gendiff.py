@@ -15,6 +15,12 @@ def main():
         type=str,
     )
 
+    parser.add_argument(
+        "-f",
+        '--format',
+        help='set format of output',
+        type=str,
+    )
     if len(sys.argv) == 1:
         parser.print_help(sys.stderr)
         sys.exit(0)

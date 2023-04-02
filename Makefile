@@ -10,7 +10,7 @@ check:
 	make lint
 	make test
 test-coverage:
-	poetry run pytest --cov --cov-report xml
+	poetry run pytest --cov --cov-report term-missing --cov-report xml
 build:
 	poetry build
 publish:

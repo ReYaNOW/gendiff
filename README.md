@@ -1,6 +1,5 @@
 ### Hexlet tests and linter status:
-[![Actions Status](https://github.com/ReYaNOW/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/ReYaNOW/python-project-50/actions)
-
+[![Actions Status](https://github.com/ReYaNOW/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/ReYaNOW/python-project-50/actions) [![Project tests with CI](https://github.com/ReYaNOW/python-project-50/actions/workflows/action_tests.yml/badge.svg)](https://github.com/ReYaNOW/python-project-50/actions/workflows/action_tests.yml) [![Test Coverage](https://api.codeclimate.com/v1/badges/f3344950f20704d22db6/test_coverage)](https://codeclimate.com/github/ReYaNOW/python-project-50/test_coverage)
 
 Этот проект представляет собой программу - Вычислитель отличий
 

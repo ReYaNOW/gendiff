@@ -34,11 +34,9 @@ def result_f2_to_f1_in_yaml():
     )
 
 
-@pytest.mark.usefixtures("file1_yaml", "file2_yaml")
-def test_gendiff_flat1(file1_yaml, file2_yaml, result_f1_to_f2_in_yaml):
-    assert generate_diff(file1_yaml, file2_yaml) == result_f1_to_f2_in_yaml
+def test_gendiff_flat1(file1_yaml, file2_yml, result_f1_to_f2_in_yaml):
+    assert generate_diff(file1_yaml, file2_yml) == result_f1_to_f2_in_yaml
 
 
-@pytest.mark.usefixtures("file2_yaml", "file1_yaml")
-def test_gendiff_flat2(file2_yaml, file1_yaml, result_f2_to_f1_in_yaml):
-    assert generate_diff(file2_yaml, file1_yaml) == result_f2_to_f1_in_yaml
+def test_gendiff_flat2(file2_yml, file1_yaml, result_f2_to_f1_in_yaml):
+    assert generate_diff(file2_yml, file1_yaml) == result_f2_to_f1_in_yaml

@@ -19,7 +19,8 @@ def make_parser():
     parser.add_argument(
         "-f",
         "--format",
-        help="set format of output",
+        default='stylish',
+        help="set format of output (stylish or plain), default is stylish",
         type=str,
     )
     return parser
@@ -32,7 +33,7 @@ def main():
         sys.exit(0)
 
     args = parser.parse_args()
-    print(generate_diff(args.first_file, args.second_file))
+    print(generate_diff(args.first_file, args.second_file, args.format))
 
 
 if __name__ == "__main__":

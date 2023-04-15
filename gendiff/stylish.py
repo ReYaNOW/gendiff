@@ -2,9 +2,7 @@ def check_val(value):
     match value:
         case None:
             return " null"
-        case False:
-            return f" {str(value).lower()}"
-        case True:
+        case bool():
             return f" {str(value).lower()}"
         case "":
             return ""

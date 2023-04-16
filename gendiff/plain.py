@@ -12,6 +12,8 @@ def dict_check(value):
             return "null"
         case bool():
             return str(value).lower()
+        case int():
+            return value
         case _:
             return f"'{value}'"
 

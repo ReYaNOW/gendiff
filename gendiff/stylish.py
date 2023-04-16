@@ -5,7 +5,7 @@ def check_val(value):
         case bool():
             return f" {str(value).lower()}"
         case "":
-            return ""
+            return " "
         case _:
             return f" {value}"
 
@@ -83,7 +83,7 @@ def stylish(result, diff, intend="    "):
                         operation="-",
                     )
                 if isinstance(item["new_value"], dict):
-                    result.append(f"{(intend*depth)[:-2]}- {key}: " + "{")
+                    result.append(f"{(intend*depth)[:-2]}+ {key}: " + "{")
                     keep_dict_add(result, item["new_value"], depth + 1)
                     result.append(f"{(intend*depth)}" + "}")
                 else:

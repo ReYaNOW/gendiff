@@ -4,7 +4,7 @@ import pytest
 
 
 @pytest.fixture
-def f1_to_f2_in_json_recursive():
+def f1_to_f2_in_yaml_recursive():
     return "\n".join(
         [
             "{",
@@ -55,10 +55,10 @@ def f1_to_f2_in_json_recursive():
     )
 
 
-def test_gendiff_recursive(
-    big_file1_yaml, big_file2_yml, f1_to_f2_in_json_recursive
+def test_gendiff_recursive_yaml(
+    big_file1_yaml, big_file2_yml, f1_to_f2_in_yaml_recursive
 ):
     assert (
         generate_diff(big_file1_yaml, big_file2_yml)
-        == f1_to_f2_in_json_recursive
+        == f1_to_f2_in_yaml_recursive
     )

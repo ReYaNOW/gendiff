@@ -22,5 +22,5 @@ def f1_to_f2_in_json():
     )
 
 
-def test_gendiff_flat1(big_file1_yaml, big_file2_json, f1_to_f2_in_json):
+def test_plain_format(big_file1_yaml, big_file2_json, f1_to_f2_in_json):
     assert generate_diff(big_file1_yaml, big_file2_json, format_name='plain') == f1_to_f2_in_json  # noqa  e501

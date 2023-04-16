@@ -4,7 +4,7 @@ import pytest
 
 
 @pytest.fixture
-def result_f1_to_f2_in_json():
+def f1_to_f2_in_json():
     return "\n".join(
         [
             "{",
@@ -20,7 +20,7 @@ def result_f1_to_f2_in_json():
 
 
 @pytest.fixture
-def result_f2_to_f1_in_json():
+def f2_to_f1_in_json():
     return "\n".join(
         [
             "{",
@@ -35,9 +35,9 @@ def result_f2_to_f1_in_json():
     )
 
 
-def test_gendiff_flat1(file1_json, file2_yml, result_f1_to_f2_in_json):
-    assert generate_diff(file1_json, file2_yml) == result_f1_to_f2_in_json
+def test_gendiff_yaml_and_json1(file1_json, file2_yml, f1_to_f2_in_json):
+    assert generate_diff(file1_json, file2_yml) == f1_to_f2_in_json
 
 
-def test_gendiff_flat2(file1_yaml, file2_json, result_f2_to_f1_in_json):
-    assert generate_diff(file2_json, file1_yaml) == result_f2_to_f1_in_json
+def test_gendiff_flat2(file1_yaml, file2_json, f2_to_f1_in_json):
+    assert generate_diff(file2_json, file1_yaml) == f2_to_f1_in_json

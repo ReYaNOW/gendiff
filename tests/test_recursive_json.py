@@ -55,7 +55,7 @@ def f1_to_f2_in_json_recursive():
     )
 
 
-def test_gendiff_recursive(
+def test_gendiff_recursive_json(
     big_file1_json, big_file2_json, f1_to_f2_in_json_recursive
 ):
     assert (

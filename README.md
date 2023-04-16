@@ -21,4 +21,5 @@
 [Пример работы команды c **json** файлами](https://asciinema.org/a/572987?autoplay=1)  
 [Пример работы команды с **yaml** файлами](https://asciinema.org/a/573331?autoplay=1)  
 [Пример работы команды с **yaml** и **json** файлами со вложенными структурами](https://asciinema.org/a/577785?autoplay=1)  
-[Пример работы команды в формате plain text](https://asciinema.org/a/577804?autoplay=1) 
+[Пример работы команды в формате **plain text**](https://asciinema.org/a/577804?autoplay=1)  
+[Пример работы команды в формате **json**](https://asciinema.org/a/577919?autoplay=1) 

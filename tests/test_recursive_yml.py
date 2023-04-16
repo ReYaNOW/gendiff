@@ -20,7 +20,7 @@ def f1_to_f2_in_yaml_recursive():
             "        }",
             "        setting6: {",
             "            doge: {",
-            "              - wow:",
+            "              - wow: ",
             "              + wow: so much",
             "            }",
             "            key: value",

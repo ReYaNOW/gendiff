@@ -31,7 +31,3 @@ def generate_diff(path1: str, path2: str, format_name: str = "stylish") -> str:
             return out_json(diff)
         case _:
             return "Wrong format!\nPlease choose from stylish, plain or json"
-
-
-if __name__ == "__main__":
-    generate_diff("file1.json", "file2.json")

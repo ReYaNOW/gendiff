@@ -8,10 +8,13 @@ from copy import deepcopy
 
 def update(f1, f2):
     for k, v in f2.items():
-        if isinstance(v, dict):
-            f1[k] = update(f1.get(k, {}), v)
+        if not isinstance(f1, dict):
+            f1 = f2
+        elif isinstance(v, dict):
+            r = update(f1.get(k, {}), v)
+            f1[k] = r
         else:
-            f1[k] = v
+            f1[k] = f2[k]
     return f1
 
 
@@ -24,7 +27,11 @@ def generate_diff(path1: str, path2: str, format_name: str = "stylish") -> str:
             return out_stylish(diff)
         case "plain":
             return out_plain(diff)
-        case 'json':
+        case "json":
             return out_json(diff)
         case _:
             return "Wrong format!\nPlease choose from stylish, plain or json"
+
+
+if __name__ == "__main__":
+    generate_diff("file1.json", "file2.json")

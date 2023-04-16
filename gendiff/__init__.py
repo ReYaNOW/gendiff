@@ -2,6 +2,7 @@ from gendiff.parsing import parse_files
 from gendiff.diff import make_diff
 from gendiff.stylish import out_stylish
 from gendiff.plain import out_plain
+from gendiff.json_output import out_json
 from copy import deepcopy
 
 
@@ -23,5 +24,7 @@ def generate_diff(path1: str, path2: str, format_name: str = "stylish") -> str:
             return out_stylish(diff)
         case "plain":
             return out_plain(diff)
+        case 'json':
+            return out_json(diff)
         case _:
             return "Wrong format!\nPlease choose from stylish, plain or json"

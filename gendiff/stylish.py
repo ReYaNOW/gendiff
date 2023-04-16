@@ -45,7 +45,7 @@ def stylish(result, diff, intend="    "):
                 simple_add(
                     result,
                     key,
-                    item["old_value"],
+                    item["value"],
                     intend,
                     depth,
                     operation=" ",

@@ -16,13 +16,13 @@ def make_diff(general_dict, f1, f2, depth=1):
                 else:
                     current = {
                         "key": k,
-                        "old_value": f1[k],
-                        "new_value": f1[k],
+                        "value": f1[k],
                         "type": "keep",
                         "depth": depth,
                     }
                     if f1[k] != f2[k]:
                         current["type"] = "change"
+                        current["old_value"] = current.pop('value')
                         current["new_value"] = f2[k]
                     result.append(current)
             case _:

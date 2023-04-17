@@ -16,11 +16,12 @@ def make_parser():
         type=str,
     )
 
+    help_ = "set format of output (stylish, plain or json), default is stylish"
     parser.add_argument(
         "-f",
         "--format",
-        default='stylish',
-        help="set format of output (stylish or plain), default is stylish",
+        default="stylish",
+        help=help_,
         type=str,
     )
     return parser

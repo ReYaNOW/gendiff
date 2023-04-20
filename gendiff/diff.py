@@ -1,4 +1,20 @@
-def make_diff(general_dict, f1, f2, depth=1):
+def make_diff(general_dict: dict, f1: dict, f2: dict, depth=1) -> list:
+    """
+    Computes the difference between two given dictionaries,
+    and returns a list of changes made.
+
+    Args:
+        general_dict (dict): the general dictionary
+        that contains both f1 and f2
+        f1 (dict): the first dictionary to be compared
+        f2 (dict): the second dictionary to be compared to f1
+        depth (int): the level of depth in the dictionary
+        being currently compared, default at 1
+
+    Returns:
+        A list of dictionary items that represent the differences between
+        f1 and f2. A dictionary item represents a specific change.
+    """
     general_dict = dict(sorted(general_dict.items()))
     result = []
     for k, v in general_dict.items():
@@ -22,7 +38,7 @@ def make_diff(general_dict, f1, f2, depth=1):
                     }
                     if f1[k] != f2[k]:
                         current["type"] = "change"
-                        current["old_value"] = current.pop('value')
+                        current["old_value"] = current.pop("value")
                         current["new_value"] = f2[k]
                     result.append(current)
             case _:

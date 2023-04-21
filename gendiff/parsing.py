@@ -3,12 +3,11 @@ import json
 
 
 def parser(file, extension):
-    match extension:
-        case "json":
-            with open(file) as file:
+    with open(file) as file:
+        match extension:
+            case "json":
                 return json.load(file)
-        case "yaml" | "yml":
-            with open(file) as file:
+            case "yaml" | "yml":
                 return yaml.safe_load(file)
 
 

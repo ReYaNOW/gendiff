@@ -1,9 +1,9 @@
 def make_diff(general_dict: dict, f1: dict, f2: dict, depth=1) -> list:
     """
-    Computes the difference between two given dictionaries,
-    and returns a list of changes made.
+    Compute the difference between two given dictionaries,
+    and return a list of changes made.
 
-    Args:
+    args:
         general_dict (dict): the general dictionary
         that contains both f1 and f2
         f1 (dict): the first dictionary to be compared
@@ -11,7 +11,7 @@ def make_diff(general_dict: dict, f1: dict, f2: dict, depth=1) -> list:
         depth (int): the level of depth in the dictionary
         being currently compared, default at 1
 
-    Returns:
+    return:
         A list of dictionary items that represent the differences between
         f1 and f2. A dictionary item represents a specific change.
     """

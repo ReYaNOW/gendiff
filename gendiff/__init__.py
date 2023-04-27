@@ -20,15 +20,15 @@ def update(f1, f2):
 
 def generate_diff(path1: str, path2: str, format_name: str = "stylish") -> str:
     """
-    This function generates the difference between two files.
+    Generate the difference between two files.
 
-    Args:
+    args:
     - path1 (str): the path to the first file to be compared.
     - path2 (str): the path to the second file to be compared.
     - format_name (str): the format to output the result in.
     Default is "stylish", options are "stylish", "plain", or "json".
 
-    Returns:
+    return:
     - str: the difference between the two files in the specified format.
     """
     f1, f2 = parse_files(path1, path2)

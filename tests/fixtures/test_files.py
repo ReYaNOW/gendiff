@@ -1,7 +1,7 @@
 import pytest
 
 pytest_plugins = [
-    "tests.fixtures.test_files",
+    "tests.fixtures.test_files", "tests.fixtures.result_fixtures"
 ]
 
 

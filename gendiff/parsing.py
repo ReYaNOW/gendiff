@@ -5,9 +5,9 @@ import json
 def parser(file, extension):
     with open(file) as file:
         match extension:
-            case "json":
+            case 'json':
                 return json.load(file)
-            case "yaml" | "yml":
+            case 'yaml' | 'yml':
                 return yaml.safe_load(file)
 
 

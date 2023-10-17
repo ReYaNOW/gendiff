@@ -1,3 +1,39 @@
+def get_diff_with_same_keys(f1, f2, key, value, depth):
+    if isinstance(f1[key], dict) and isinstance(f2[key], dict):
+        return {
+            'key': key,
+            'value': make_diff(value, f1[key], f2[key], depth + 1),
+            'type': 'dict',
+            'depth': depth,
+        }
+
+    node = {'key': key, 'value': f1[key], 'type': 'keep', 'depth': depth}
+    if f1[key] != f2[key]:
+        node['type'] = 'change'
+        node['new_value'] = f2[key]
+    return node
+
+
+def get_diff_with_not_same_keys(f1, f2, key, depth):
+    node = {
+        'key': key,
+        'type': 'delete',
+        'depth': depth,
+    }
+    if key in f1 and key not in f2:
+        node['type'] = 'delete'
+        node['value'] = f1[key]
+        if isinstance(node['value'], dict):
+            node['type'] = 'dict_delete'
+    elif key not in f1 and key in f2:
+        node['type'] = 'add'
+        node['value'] = f2[key]
+        if isinstance(node['value'], dict):
+            node['type'] = 'dict_add'
+
+    return node
+
+
 def make_diff(general_dict: dict, f1: dict, f2: dict, depth=1) -> list:
     """
     Compute the difference between two given dictionaries,
@@ -18,44 +54,9 @@ def make_diff(general_dict: dict, f1: dict, f2: dict, depth=1) -> list:
     general_dict = dict(sorted(general_dict.items()))
     result = []
     for k, v in general_dict.items():
-        match f1:
-            case {} if k in f1 and k in f2:
-                if isinstance(f1[k], dict) and isinstance(f2[k], dict):
-                    result.append(
-                        {
-                            'key': k,
-                            'value': make_diff(v, f1[k], f2[k], depth + 1),
-                            'type': 'dict',
-                            'depth': depth,
-                        }
-                    )
-                else:
-                    current = {
-                        'key': k,
-                        'value': f1[k],
-                        'type': 'keep',
-                        'depth': depth,
-                    }
-                    if f1[k] != f2[k]:
-                        current['type'] = 'change'
-                        current['old_value'] = current.pop("value")
-                        current['new_value'] = f2[k]
-                    result.append(current)
-            case _:
-                current = {
-                    'key': k,
-                    'type': 'delete',
-                    'depth': depth,
-                }
-                if k in f1 and k not in f2:
-                    current['type'] = 'delete'
-                    current['value'] = f1[k]
-                    if isinstance(current['value'], dict):
-                        current['type'] = 'dict_delete'
-                elif k not in f1 and k in f2:
-                    current['type'] = 'add'
-                    current['value'] = f2[k]
-                    if isinstance(current['value'], dict):
-                        current['type'] = 'dict_add'
-                result.append(current)
+        if k in f1 and k in f2:
+            node = get_diff_with_same_keys(f1, f2, k, v, depth)
+        else:
+            node = get_diff_with_not_same_keys(f1, f2, k, depth)
+        result.append(node)
     return result

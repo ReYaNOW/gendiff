@@ -4,8 +4,8 @@ def check_val(value):
             return ' null'
         case bool():
             return f' {str(value).lower()}'
-        case '':
-            return ' '
+        # case '':
+        #     return ' '
         case _:
             return f' {value}'
 
@@ -69,15 +69,15 @@ def stylish(result, diff, intend='    '):
                     operation='-',
                 )
             case 'change':
-                if isinstance(item['old_value'], dict):
+                if isinstance(item['value'], dict):
                     result.append(f'{(intend * depth)[:-2]}- {key}: ' + '{')
-                    keep_dict_add(result, item['old_value'], depth + 1)
+                    keep_dict_add(result, item['value'], depth + 1)
                     result.append(f'{(intend * depth)}' + '}')
                 else:
                     simple_add(
                         result,
                         key,
-                        item['old_value'],
+                        item['value'],
                         intend,
                         depth,
                         operation='-',

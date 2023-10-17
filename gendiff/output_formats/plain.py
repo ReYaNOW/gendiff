@@ -35,7 +35,7 @@ def plain(result, diff, path='', prp='Property '):
             case 'change':
                 words = ' was updated. From'
                 current_path = path_check(path, key)
-                o_v = dict_check(item['old_value'])
+                o_v = dict_check(item['value'])
                 n_v = dict_check(item['new_value'])
                 result.append(f"{prp}'{current_path}'{words} {o_v} to {n_v}")
     return result

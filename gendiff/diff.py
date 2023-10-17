@@ -7,7 +7,12 @@ def get_diff_with_same_keys(f1, f2, key, value, depth):
             'depth': depth,
         }
 
-    node = {'key': key, 'value': f1[key], 'type': 'keep', 'depth': depth}
+    node = {
+        'key': key,
+        'value': f1[key],
+        'type': 'keep',
+        'depth': depth,
+    }
     if f1[key] != f2[key]:
         node['type'] = 'change'
         node['new_value'] = f2[key]
@@ -23,13 +28,13 @@ def get_diff_with_not_same_keys(f1, f2, key, depth):
     if key in f1 and key not in f2:
         node['type'] = 'delete'
         node['value'] = f1[key]
-        if isinstance(node['value'], dict):
-            node['type'] = 'dict_delete'
+        # if isinstance(node['value'], dict):
+        #     node['type'] = 'dict_delete'
     elif key not in f1 and key in f2:
         node['type'] = 'add'
         node['value'] = f2[key]
-        if isinstance(node['value'], dict):
-            node['type'] = 'dict_add'
+        # if isinstance(node['value'], dict):
+        #     node['type'] = 'dict_add'
 
     return node
 

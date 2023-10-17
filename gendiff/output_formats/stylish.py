@@ -4,105 +4,79 @@ def check_val(value):
             return ' null'
         case bool():
             return f' {str(value).lower()}'
-        # case '':
-        #     return ' '
         case _:
             return f' {value}'
 
 
-def keep_dict_add(result, value, depth=1, replace='    '):
-    if not isinstance(value, dict):
-        return f'{check_val(value)}'
-    for k, v in value.items():
-        if isinstance(v, dict):
-            result.append(f'{replace * depth}{k}: ' + '{')
-            keep_dict_add(result, v, depth + 1)
-            result.append(f'{replace * depth}' + '}')
-            continue
-        result.append(f'{replace*depth}{k}:{keep_dict_add(result, v, depth)}')
+def add_dict_without_internal_changes(key, value, intend, depth, symbol):
+    def recursive_add(value, depth=1):
+        if not isinstance(value, dict):
+            return f'{check_val(value)}'
+
+        for k, v in value.items():
+            if isinstance(v, dict):
+                result.append(f'{intend * depth}{k}: ' + '{')
+                recursive_add(v, depth + 1)
+                result.append(f'{intend * depth}' + '}')
+                continue
+            result.append(f'{intend * depth}{k}:{recursive_add(v, depth)}')
+
+    result = [f'{(intend * depth)[:-2]}{symbol} {key}: ' + '{']
+    recursive_add(value, depth + 1)
+    result.append(f'{(intend * depth)}' + '}')
+    return result
 
 
-def simple_add(result, key, value, intend, depth, operation):
-    match operation:
-        case ' ':
-            result.append(f'{intend * depth}{key}:{check_val(value)}')
-        case '-':
-            result.append(f'{(intend * depth)[:-2]}- {key}:{check_val(value)}')
-        case '+':
-            result.append(f'{(intend * depth)[:-2]}+ {key}:{check_val(value)}')
+def get_lines(key, value, intend, depth, type_):
+    match type_:
+        case 'add':
+            symbol = '+'
+        case 'delete':
+            symbol = '-'
+        case _:
+            symbol = ' '
+    
+    if isinstance(value, dict):
+        return add_dict_without_internal_changes(
+            key, value, intend, depth, symbol
+        )
+    return [f'{(intend * depth)[:-2]}{symbol} {key}:{check_val(value)}']
 
 
-def stylish(result, diff, intend='    '):
+def stylish(result: list, diff, intend='    '):
     for item in diff:
-        depth = item['depth']
+        type_ = item['type']
         key = item['key']
+        depth = item['depth']
+
         match item['type']:
             case 'dict':
                 result.append(f'{intend * depth}{key}: ' + "{")
                 stylish(result, item['value'])
                 result.append(f'{intend * depth}' + '}')
-            case 'keep':
-                simple_add(
-                    result,
-                    key,
-                    item['value'],
-                    intend,
-                    depth,
-                    operation=' ',
+
+            case 'keep' | 'add' | 'delete':
+                result.extend(
+                    get_lines(key, item['value'], intend, depth, type_)
                 )
-            case 'add':
-                simple_add(
-                    result,
-                    key,
-                    item['value'],
-                    intend,
-                    depth,
-                    operation='+',
-                )
-            case 'delete':
-                simple_add(
-                    result,
-                    key,
-                    item['value'],
-                    intend,
-                    depth,
-                    operation='-',
-                )
+
             case 'change':
-                if isinstance(item['value'], dict):
-                    result.append(f'{(intend * depth)[:-2]}- {key}: ' + '{')
-                    keep_dict_add(result, item['value'], depth + 1)
-                    result.append(f'{(intend * depth)}' + '}')
-                else:
-                    simple_add(
-                        result,
-                        key,
-                        item['value'],
-                        intend,
-                        depth,
-                        operation='-',
-                    )
-                if isinstance(item['new_value'], dict):
-                    result.append(f'{(intend * depth)[:-2]}+ {key}: ' + '{')
-                    keep_dict_add(result, item['new_value'], depth + 1)
-                    result.append(f'{(intend * depth)}' + '}')
-                else:
-                    simple_add(
-                        result,
-                        key,
-                        item['new_value'],
-                        intend,
-                        depth,
-                        operation='+',
-                    )
+                result.extend(
+                    get_lines(key, item['value'], intend, depth, 'delete')
+                )
+                result.extend(
+                    get_lines(key, item['new_value'], intend, depth, 'add')
+                )
             case 'dict_delete':
-                result.append(f'{(intend * depth)[:-2]}- {key}: ' + '{')
-                keep_dict_add(result, item['value'], depth + 1)
-                result.append(f'{(intend * depth)}' + '}')
+                new_lines = add_dict_without_internal_changes(
+                    key, item['value'], intend, depth, '-'
+                )
+                result.extend(new_lines)
             case 'dict_add':
-                result.append(f'{(intend * depth)[:-2]}+ {key}: ' + '{')
-                keep_dict_add(result, item['value'], depth + 1)
-                result.append(f'{(intend * depth)}' + '}')
+                new_lines = add_dict_without_internal_changes(
+                    key, item['value'], intend, depth, '+'
+                )
+                result.extend(new_lines)
     return result
 
 

@@ -35,7 +35,7 @@ def get_lines(key, value, intend, depth, type_):
             symbol = '-'
         case _:
             symbol = ' '
-    
+
     if isinstance(value, dict):
         return add_dict_without_internal_changes(
             key, value, intend, depth, symbol

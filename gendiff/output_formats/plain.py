@@ -1,10 +1,10 @@
-def path_check(path, key):
+def check_path(path: str, key) -> str:
     if path == '':
         return key
     return f'{path}.{key}'
 
 
-def dict_check(value):
+def check_value(value) -> str:
     match value:
         case dict():
             return '[complex value]'
@@ -15,29 +15,30 @@ def dict_check(value):
         case int():
             return value
         case _:
-            return f'\'{value}\''
+            return f"'{value}'"
 
 
-def plain(result, diff, path='', prp='Property '):
+def plain(result: list, diff: list, current_path: str = '') -> list:
     for item in diff:
         key = item['key']
         match item['type']:
             case 'dict':
-                plain(result, item['value'], path_check(path, key))
-            case 'add' | 'dict_add':
-                words = ' was added with value:'
-                current_path = path_check(path, key)
-                v = dict_check(item['value'])
-                result.append(f"{prp}'{current_path}'{words} {v}")
-            case 'delete' | 'dict_delete':
-                current_path = path_check(path, key)
-                result.append(f"{prp}'{current_path}' was removed")
+                plain(result, item['value'], check_path(current_path, key))
+            case 'add':
+                path = check_path(current_path, key)
+                val = check_value(item['value'])
+                result.append(f"Property '{path}' was added with value: {val}")
+            case 'delete':
+                path = check_path(current_path, key)
+                result.append(f"Property '{path}' was removed")
             case 'change':
-                words = ' was updated. From'
-                current_path = path_check(path, key)
-                o_v = dict_check(item['value'])
-                n_v = dict_check(item['new_value'])
-                result.append(f"{prp}'{current_path}'{words} {o_v} to {n_v}")
+                path = check_path(current_path, key)
+                old_val = check_value(item['value'])
+                new_val = check_value(item['new_value'])
+                result.append(
+                    f"Property '{path}' was updated. "
+                    f"From {old_val} to {new_val}"
+                )
     return result
 
 

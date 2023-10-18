@@ -3,7 +3,7 @@ import sys
 from gendiff import generate_diff
 
 
-def make_parser():
+def make_parser() -> argparse.ArgumentParser:
     description = 'Compares two configuration files and shows a difference.'
     parser = argparse.ArgumentParser(prog='gendiff', description=description)
     parser.add_argument(

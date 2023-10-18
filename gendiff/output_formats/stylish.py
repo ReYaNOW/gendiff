@@ -1,33 +1,17 @@
-def check_val(value):
+INTEND = '    '
+
+
+def check_val(value) -> str:
     match value:
         case None:
-            return ' null'
+            return 'null'
         case bool():
-            return f' {str(value).lower()}'
+            return f'{str(value).lower()}'
         case _:
-            return f' {value}'
+            return f'{value}'
 
 
-def add_dict_without_internal_changes(key, value, intend, depth, symbol):
-    def recursive_add(value, depth=1):
-        if not isinstance(value, dict):
-            return f'{check_val(value)}'
-
-        for k, v in value.items():
-            if isinstance(v, dict):
-                result.append(f'{intend * depth}{k}: ' + '{')
-                recursive_add(v, depth + 1)
-                result.append(f'{intend * depth}' + '}')
-                continue
-            result.append(f'{intend * depth}{k}:{recursive_add(v, depth)}')
-
-    result = [f'{(intend * depth)[:-2]}{symbol} {key}: ' + '{']
-    recursive_add(value, depth + 1)
-    result.append(f'{(intend * depth)}' + '}')
-    return result
-
-
-def get_lines(key, value, intend, depth, type_):
+def get_lines_from_node(key: str, value, depth: int, type_: str) -> list:
     match type_:
         case 'add':
             symbol = '+'
@@ -37,46 +21,59 @@ def get_lines(key, value, intend, depth, type_):
             symbol = ' '
 
     if isinstance(value, dict):
-        return add_dict_without_internal_changes(
-            key, value, intend, depth, symbol
-        )
-    return [f'{(intend * depth)[:-2]}{symbol} {key}:{check_val(value)}']
+        return add_dict_without_internal_changes(key, value, depth, symbol)
+    return [f'{(INTEND * depth)[:-2]}{symbol} {key}: {check_val(value)}']
 
 
-def stylish(result: list, diff, intend='    '):
+def get_line_with_brace(
+    depth: int, key=None, symbol: str = '', opening: bool = True
+) -> str:
+    if opening:
+        if symbol:
+            return f'{(INTEND * depth)[:-2]}{symbol} {key}: ' + '{'
+        return f'{INTEND * depth}{key}: ' + '{'
+    return f'{INTEND * depth}' + '}'
+
+
+def add_dict_without_internal_changes(
+    key: str, value: dict, depth: int, symbol: str
+) -> list:
+    def recursive_add(value, depth):
+        for k, v in value.items():
+            if isinstance(v, dict):
+                result.append(get_line_with_brace(depth, k, opening=True))
+                recursive_add(v, depth + 1)
+                result.append(get_line_with_brace(depth, k, opening=False))
+                continue
+            result.append(f'{INTEND * depth}{k}: {check_val(v)}')
+
+    result = [get_line_with_brace(depth, key, symbol, opening=True)]
+    recursive_add(value, depth + 1)
+    result.append(get_line_with_brace(depth, opening=False))
+    return result
+
+
+def stylish(result: list, diff: list) -> list:
     for item in diff:
         type_ = item['type']
+        value = item['value']
         key = item['key']
         depth = item['depth']
 
-        match item['type']:
+        match type_:
             case 'dict':
-                result.append(f'{intend * depth}{key}: ' + "{")
-                stylish(result, item['value'])
-                result.append(f'{intend * depth}' + '}')
-
-            case 'keep' | 'add' | 'delete':
-                result.extend(
-                    get_lines(key, item['value'], intend, depth, type_)
-                )
+                result.append(get_line_with_brace(depth, key, opening=True))
+                stylish(result, value)
+                result.append(get_line_with_brace(depth, key, opening=False))
 
             case 'change':
+                result.extend(get_lines_from_node(key, value, depth, 'delete'))
                 result.extend(
-                    get_lines(key, item['value'], intend, depth, 'delete')
+                    get_lines_from_node(key, item['new_value'], depth, 'add')
                 )
-                result.extend(
-                    get_lines(key, item['new_value'], intend, depth, 'add')
-                )
-            case 'dict_delete':
-                new_lines = add_dict_without_internal_changes(
-                    key, item['value'], intend, depth, '-'
-                )
-                result.extend(new_lines)
-            case 'dict_add':
-                new_lines = add_dict_without_internal_changes(
-                    key, item['value'], intend, depth, '+'
-                )
-                result.extend(new_lines)
+
+            case _:
+                result.extend(get_lines_from_node(key, value, depth, type_))
     return result
 
 

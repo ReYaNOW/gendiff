@@ -19,26 +19,6 @@ def get_diff_with_same_keys(f1, f2, key, value, depth):
     return node
 
 
-def get_diff_with_not_same_keys(f1, f2, key, depth):
-    node = {
-        'key': key,
-        'type': 'delete',
-        'depth': depth,
-    }
-    if key in f1 and key not in f2:
-        node['type'] = 'delete'
-        node['value'] = f1[key]
-        # if isinstance(node['value'], dict):
-        #     node['type'] = 'dict_delete'
-    elif key not in f1 and key in f2:
-        node['type'] = 'add'
-        node['value'] = f2[key]
-        # if isinstance(node['value'], dict):
-        #     node['type'] = 'dict_add'
-
-    return node
-
-
 def make_diff(general_dict: dict, f1: dict, f2: dict, depth=1) -> list:
     """
     Compute the difference between two given dictionaries,
@@ -58,10 +38,20 @@ def make_diff(general_dict: dict, f1: dict, f2: dict, depth=1) -> list:
     """
     general_dict = dict(sorted(general_dict.items()))
     result = []
-    for k, v in general_dict.items():
-        if k in f1 and k in f2:
-            node = get_diff_with_same_keys(f1, f2, k, v, depth)
+    for key, value in general_dict.items():
+        if key in f1 and key in f2:
+            node = get_diff_with_same_keys(f1, f2, key, value, depth)
         else:
-            node = get_diff_with_not_same_keys(f1, f2, k, depth)
+            node = {
+                'key': key,
+                'type': 'delete',
+                'depth': depth,
+            }
+            if key in f1 and key not in f2:
+                node['type'] = 'delete'
+                node['value'] = f1[key]
+            elif key not in f1 and key in f2:
+                node['type'] = 'add'
+                node['value'] = f2[key]
         result.append(node)
     return result

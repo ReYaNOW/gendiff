@@ -71,7 +71,7 @@ gendiff [Путь до файла 1] [Путь до файла 2]
 ![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/json_plain.gif?raw=true)  
   
 #### [Пример работы](https://asciinema.org/a/616201?autoplay=1) команды в формате json  
-![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/json_format_json__v2.gif?raw=true)  
+![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/json_format_json_v2.gif?raw=true)  
   
 ### Минимальные требования:  
 [Python^3.10](https://www.python.org/)  

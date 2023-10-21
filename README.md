@@ -41,7 +41,7 @@ gendiff -h
 ```
 brain-even
 ```  
-<a href="https://asciinema.org/a/616198?autoplay=1" target="_blank" rel="noreferrer"><img src="https://media.discordapp.net/attachments/324178393161793536/1165089454793437294/image.png?ex=6545951c&is=6533201c&hm=8bf04296d9361b12999d6196665483d43d961f4b8945d276ea49c331a3024399&=" alt="image" /></a>
+<a href="https://asciinema.org/a/616198?autoplay=1" target="_blank" rel="noreferrer"><img src="https://cdn.discordapp.com/attachments/324178393161793536/1165092906365898833/image.png?ex=65459853&is=65332353&hm=f3207a585d7425955ec91531777f8b7dcea3819902f965ee263a649eec3952ff&" alt="image" /></a>
 [Пример работы команды](https://asciinema.org/a/572988?autoplay=1) 
 
 Для сравнения файлов необходимо использовать команду ```gendiff [Путь до файла 1] [Путь до файла 2]```  

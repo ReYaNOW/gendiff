@@ -25,16 +25,6 @@ def get_lines_from_node(key: str, value, depth: int, type_: str) -> list:
     return [f'{(INTEND * depth)[:-2]}{symbol} {key}: {check_val(value)}']
 
 
-def get_line_with_brace(
-    depth: int, key=None, symbol: str = '', opening: bool = True
-) -> str:
-    if opening:
-        if symbol:
-            return f'{(INTEND * depth)[:-2]}{symbol} {key}: ' + '{'
-        return f'{INTEND * depth}{key}: ' + '{'
-    return f'{INTEND * depth}' + '}'
-
-
 def add_dict_without_internal_changes(
     key: str, value: dict, depth: int, symbol: str
 ) -> list:
@@ -51,6 +41,16 @@ def add_dict_without_internal_changes(
     recursive_add(value, depth + 1)
     result.append(get_line_with_brace(depth, opening=False))
     return result
+
+
+def get_line_with_brace(
+    depth: int, key=None, symbol: str = '', opening: bool = True
+) -> str:
+    if opening:
+        if symbol:
+            return f'{(INTEND * depth)[:-2]}{symbol} {key}: ' + '{'
+        return f'{INTEND * depth}{key}: ' + '{'
+    return f'{INTEND * depth}' + '}'
 
 
 def stylish(result: list, diff: list) -> list:

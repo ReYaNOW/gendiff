@@ -13,40 +13,71 @@
 
 ## Установка  
 
-Для установки игры необходимо использовать команду, находясь в корневой директории проекта
+Для установки программы необходимо использовать команду, находясь в корневой директории проекта
 ```
 poetry install
 ```
   
-Так же имеется возможность сделать билд игры с последующей установкой при помощи двух команд
+Так же имеется возможность сделать билд проекта с последующей установкой при помощи двух команд
 ```
 poetry build && pip install dist/*.whl
 ```
 
-Так же можно установить игру без клонирования репозитория, но после этого нужно будет установить зависимости, указанные ниже
+Так же можно установить программу без клонирования репозитория, но после этого нужно будет установить зависимости, указанные ниже
 ```
 python3 -m pip install --user git+https://github.com/ReYaNOW/python-project-50.git
+```  
+  
+![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/installv2.gif?raw=true)  
+  
+###### Устанавливать программу стоит в отдельном окружении для избежания проблем с зависимостями  
+
+#### Как создать окружение и активировать его
+Windows  PowerShell
+```
+python -m venv venv; ./venv/Scripts/activate.ps1
 ```
   
-![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/installv2.gif?raw=true)
-
-Для того чтобы увидеть мануал по программе необходимо использовать команду 
+Linux  
+```
+python3 -m venv venv && source venv/bin/activate
+```
+   
+  
+## Использование  
+  
+Для того чтобы увидеть мануал по программе, необходимо использовать команду 
 ```
 gendiff
 ```
 или 
 ```
 gendiff -h
-```
-```
-brain-even
-```  
+``` 
 <a href="https://asciinema.org/a/616198?autoplay=1" target="_blank" rel="noreferrer"><img src="https://cdn.discordapp.com/attachments/324178393161793536/1165092906365898833/image.png?ex=65459853&is=65332353&hm=f3207a585d7425955ec91531777f8b7dcea3819902f965ee263a649eec3952ff&" alt="image" /></a>
-[Пример работы команды](https://asciinema.org/a/572988?autoplay=1) 
 
-Для сравнения файлов необходимо использовать команду ```gendiff [Путь до файла 1] [Путь до файла 2]```  
-[Пример работы команды c **json** файлами](https://asciinema.org/a/572987?autoplay=1)  
-[Пример работы команды с **yaml** файлами](https://asciinema.org/a/573331?autoplay=1)  
-[Пример работы команды с **yaml** и **json** файлами со вложенными структурами](https://asciinema.org/a/577785?autoplay=1)  
-[Пример работы команды в формате **plain text**](https://asciinema.org/a/577804?autoplay=1)  
-[Пример работы команды в формате **json**](https://asciinema.org/a/577919?autoplay=1) 
+Для сравнения файлов необходимо использовать команду 
+```  
+gendiff [Путь до файла 1] [Путь до файла 2]  
+```  
+  
+[Пример работы](https://asciinema.org/a/572987?autoplay=1) команды c **json** файлами 
+![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/json_stylish.gif?raw=true)  
+  
+[Пример работы](https://asciinema.org/a/577785?autoplay=1) команды с **yaml** и **json** файлами со вложенными структурами
+![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/json_yaml_recursive.gif?raw=true)
+  
+[Пример работы](https://asciinema.org/a/616200?autoplay=1) команды в формате **plain text**  
+![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/json_plain.gif?raw=true)  
+  
+[Пример работы](https://asciinema.org/a/616201?autoplay=1) команды в формате **json**  
+![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/json_format_json.gif?raw=true)
+  
+### Минимальные требования:  
+[Python^3.10](https://www.python.org/)  
+[Poetry](https://python-poetry.org/)  
+#### Библиотеки Python:  
+[Flake8](https://pypi.org/project/flake8/)  
+[Pytest](https://pypi.org/project/pytest/)  
+[Pytest-cov](https://pypi.org/project/pytest-cov/)  
+[PyYAML](https://pypi.org/project/pytest-cov/)

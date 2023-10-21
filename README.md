@@ -28,7 +28,7 @@ poetry build && pip install dist/*.whl
 python3 -m pip install --user git+https://github.com/ReYaNOW/python-project-50.git
 ```
   
-![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/install.gif?raw=true)
+![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/installv2.gif?raw=true)
 
 Для того чтобы увидеть мануал по программе необходимо использовать команду 
 ```

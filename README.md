@@ -61,16 +61,16 @@ gendiff -h
 gendiff [Путь до файла 1] [Путь до файла 2]  
 ```  
   
-[Пример работы](https://asciinema.org/a/572987?autoplay=1) команды c **json** файлами 
+#### [Пример работы](https://asciinema.org/a/572987?autoplay=1) команды c **json** файлами 
 ![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/json_stylish.gif?raw=true)  
   
-[Пример работы](https://asciinema.org/a/577785?autoplay=1) команды с **yaml** и **json** файлами со вложенными структурами
+#### [Пример работы](https://asciinema.org/a/577785?autoplay=1) команды с **yaml** и **json** файлами со вложенными структурами
 ![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/json_yaml_recursive.gif?raw=true)
   
-[Пример работы](https://asciinema.org/a/616200?autoplay=1) команды в формате **plain text**  
+#### [Пример работы](https://asciinema.org/a/616200?autoplay=1) команды в формате **plain text**  
 ![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/json_plain.gif?raw=true)  
   
-[Пример работы](https://asciinema.org/a/616201?autoplay=1) команды в формате **json**  
+#### [Пример работы](https://asciinema.org/a/616201?autoplay=1) команды в формате **json**  
 ![](https://github.com/ReYaNOW/repo_for_gifs/blob/main/python-project-50-gifs/json_format_json.gif?raw=true)
   
 ### Минимальные требования:  

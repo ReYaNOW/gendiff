@@ -1,4 +1,5 @@
-from gendiff.get_diff import get_diff
+from gendiff.diff import get_diff
+
 from gendiff.output_formats.json_output import out_json
 from gendiff.output_formats.plain import out_plain
 from gendiff.output_formats.stylish import out_stylish

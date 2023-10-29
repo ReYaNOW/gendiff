@@ -1,7 +1,7 @@
 import argparse
 
 
-def make_parser() -> argparse.ArgumentParser:
+def get_args_from_cli() -> argparse.Namespace:
     description = 'Compares two configuration files and shows a difference.'
     parser = argparse.ArgumentParser(prog='gendiff', description=description)
     parser.add_argument(
@@ -22,4 +22,5 @@ def make_parser() -> argparse.ArgumentParser:
         help=help_,
         type=str,
     )
-    return parser
+    args = parser.parse_args()
+    return args

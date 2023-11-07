@@ -7,6 +7,6 @@ def validate_value(value, format_name: str = 'stylish') -> str:
         case dict() if format_name == 'plain':
             return '[complex value]'
         case _:
-            if format_name == 'plain':
+            if format_name == 'plain' and not isinstance(value, int):
                 return f"'{value}'"
             return f'{value}'

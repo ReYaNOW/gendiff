@@ -3,7 +3,7 @@ from gendiff.output_formats.plain import out_plain
 from gendiff.output_formats.stylish import out_stylish
 
 
-def generate_output(diff: list, format_name: str) -> str:
+def generate_output(diff: dict, format_name: str) -> str:
     match format_name:
         case 'stylish':
             return out_stylish(diff)

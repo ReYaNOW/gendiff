@@ -1,14 +1,6 @@
+from gendiff.utils import validate_value
+
 INTEND = '    '
-
-
-def check_val(value) -> str:
-    match value:
-        case None:
-            return 'null'
-        case bool():
-            return f'{str(value).lower()}'
-        case _:
-            return f'{value}'
 
 
 def get_lines_from_node(key: str, value, depth: int, type_: str) -> list:
@@ -22,7 +14,7 @@ def get_lines_from_node(key: str, value, depth: int, type_: str) -> list:
 
     if isinstance(value, dict):
         return add_dict_without_internal_changes(key, value, depth, symbol)
-    return [f'{(INTEND * depth)[:-2]}{symbol} {key}: {check_val(value)}']
+    return [f'{(INTEND * depth)[:-2]}{symbol} {key}: {validate_value(value)}']
 
 
 def add_dict_without_internal_changes(
@@ -33,9 +25,9 @@ def add_dict_without_internal_changes(
             if isinstance(v, dict):
                 result.append(get_line_with_brace(depth, k, opening=True))
                 recursive_add(v, depth + 1)
-                result.append(get_line_with_brace(depth, k, opening=False))
-                continue
-            result.append(f'{INTEND * depth}{k}: {check_val(v)}')
+                result.append(get_line_with_brace(depth, opening=False))
+            else:
+                result.append(f'{INTEND * depth}{k}: {validate_value(v)}')
 
     result = [get_line_with_brace(depth, key, symbol, opening=True)]
     recursive_add(value, depth + 1)
@@ -53,31 +45,25 @@ def get_line_with_brace(
     return f'{INTEND * depth}' + '}'
 
 
-def stylish(result: list, diff: list) -> list:
-    for item in diff:
-        type_ = item['type']
-        value = item['value']
-        key = item['key']
-        depth = item['depth']
-
+def stylish(result: list, diff: dict, depth=1):
+    for key, v_info in diff.items():
+        type_ = v_info['type']
+        value = v_info['value']
         match type_:
             case 'dict':
                 result.append(get_line_with_brace(depth, key, opening=True))
-                stylish(result, value)
-                result.append(get_line_with_brace(depth, key, opening=False))
-
+                stylish(result, value, depth + 1)
+                result.append(get_line_with_brace(depth, opening=False))
             case 'change':
                 result.extend(get_lines_from_node(key, value, depth, 'delete'))
                 result.extend(
-                    get_lines_from_node(key, item['new_value'], depth, 'add')
+                    get_lines_from_node(key, v_info['new_value'], depth, 'add')
                 )
-
             case _:
                 result.extend(get_lines_from_node(key, value, depth, type_))
-    return result
 
 
-def out_stylish(diff: list) -> str:
+def out_stylish(diff: dict):
     result = ['{']
     stylish(result, diff)
     result.append('}')

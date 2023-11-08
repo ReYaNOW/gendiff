@@ -3,7 +3,7 @@ from gendiff.utils import validate_value
 FORMAT_NAME = 'plain'
 
 
-def check_path(path: str, key) -> str:
+def validate_path(path: str, key) -> str:
     if path == '':
         return key
     return f'{path}.{key}'
@@ -14,7 +14,7 @@ def plain(diff: dict, current_path: str = '') -> list:
     for key, v_info in diff.items():
         type_ = v_info['type']
         value = v_info['value']
-        path = check_path(current_path, key)
+        path = validate_path(current_path, key)
 
         match type_:
             case 'dict':

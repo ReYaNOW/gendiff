@@ -15,7 +15,7 @@ def plain(diff: dict, current_path: str = '') -> list:
         type_ = v_info['type']
         value = v_info['value']
         path = check_path(current_path, key)
-        
+
         match type_:
             case 'dict':
                 result.extend(plain(value, path))

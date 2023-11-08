@@ -1,25 +1,20 @@
 def make_diff_tree(dict1: dict, dict2: dict) -> dict:
     """
     Compute the difference between two given dictionaries,
-    and return a list of changes made.
-
-    args:
-        dict1 (dict): the first dictionary to be compared
-
-        dict2 (dict): the second dictionary to be compared to dict1
+    and return a dict of changes made.
     """
-    same_keys = dict1.keys() & dict2.keys()
-    added_keys = dict2.keys() - dict1.keys()
-    deleted_keys = dict1.keys() - dict2.keys()
+    keys = dict1.keys() | dict2.keys()
+    keys = sorted(keys)
 
     diff = {}
-    for key in same_keys:
-        diff[key] = get_diff_with_same_keys(dict1[key], dict2[key])
-    for key in added_keys:
-        diff[key] = {'type': 'add', 'value': dict2[key]}
-    for key in deleted_keys:
-        diff[key] = {'type': 'delete', 'value': dict1[key]}
-    diff = dict(sorted(diff.items()))
+    for key in keys:
+        if key in dict1 and key in dict2:
+            diff[key] = get_diff_with_same_keys(dict1[key], dict2[key])
+        else:
+            if key not in dict1:
+                diff[key] = {'type': 'add', 'value': dict2[key]}
+            else:
+                diff[key] = {'type': 'delete', 'value': dict1[key]}
     return diff
 
 

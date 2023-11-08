@@ -10,11 +10,10 @@ def make_diff_tree(dict1: dict, dict2: dict) -> dict:
     for key in keys:
         if key in dict1 and key in dict2:
             diff[key] = get_diff_with_same_keys(dict1[key], dict2[key])
+        elif key not in dict1:
+            diff[key] = {'type': 'add', 'value': dict2[key]}
         else:
-            if key not in dict1:
-                diff[key] = {'type': 'add', 'value': dict2[key]}
-            else:
-                diff[key] = {'type': 'delete', 'value': dict1[key]}
+            diff[key] = {'type': 'delete', 'value': dict1[key]}
     return diff
 
 

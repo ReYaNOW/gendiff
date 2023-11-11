@@ -5,9 +5,9 @@ INTEND = '    '
 
 def get_lines_from_node(key: str, value, depth: int, type_: str) -> list:
     match type_:
-        case 'add':
+        case 'added':
             symbol = '+'
-        case 'delete':
+        case 'deleted':
             symbol = '-'
         case _:
             symbol = ' '
@@ -42,21 +42,23 @@ def get_line_with_brace(depth: int, key=None, symbol='', opening=True) -> str:
 
 def stylish(diff: dict, depth=1):
     result = []
-    for key, v_info in diff.items():
-        type_ = v_info['type']
-        value = v_info['value']
+    for key, key_info in diff.items():
+        type_ = key_info['type']
+        val = key_info['value']
+        new_val = key_info.get('new_value')
+
         match type_:
-            case 'dict':
+            case 'nested':
                 result.append(get_line_with_brace(depth, key, opening=True))
-                result.extend(stylish(value, depth + 1))
+                result.extend(stylish(val, depth + 1))
                 result.append(get_line_with_brace(depth, opening=False))
-            case 'change':
-                result.extend(get_lines_from_node(key, value, depth, 'delete'))
+            case 'changed':
+                result.extend(get_lines_from_node(key, val, depth, 'deleted'))
                 result.extend(
-                    get_lines_from_node(key, v_info['new_value'], depth, 'add')
+                    get_lines_from_node(key, new_val, depth, 'added')
                 )
             case _:
-                result.extend(get_lines_from_node(key, value, depth, type_))
+                result.extend(get_lines_from_node(key, val, depth, type_))
     return result
 
 

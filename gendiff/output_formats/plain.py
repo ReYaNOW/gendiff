@@ -17,14 +17,14 @@ def plain(diff: dict, current_path: str = '') -> list:
         path = validate_path(current_path, key)
 
         match type_:
-            case 'dict':
+            case 'nested':
                 result.extend(plain(value, path))
-            case 'add':
+            case 'added':
                 val = validate_value(value, FORMAT_NAME)
                 result.append(f"Property '{path}' was added with value: {val}")
-            case 'delete':
+            case 'deleted':
                 result.append(f"Property '{path}' was removed")
-            case 'change':
+            case 'changed':
                 old_val = validate_value(value, FORMAT_NAME)
                 new_val = validate_value(v_info['new_value'], FORMAT_NAME)
                 result.append(

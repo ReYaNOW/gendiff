@@ -4,11 +4,11 @@ import json
 import yaml
 
 
-def parse_data(file: IO, data_format: str) -> dict:
+def parse_data(data: IO, data_format: str) -> dict:
     match data_format:
         case 'json':
-            return json.load(file)
+            return json.load(data)
         case 'yaml' | 'yml':
-            return yaml.safe_load(file)
+            return yaml.safe_load(data)
         case _:
             raise ValueError(f'Unsupported file format: {data_format}')

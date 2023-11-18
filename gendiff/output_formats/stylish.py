@@ -40,7 +40,7 @@ def stylish(current_value, depth):
         else:
             lines.append(get_line(key, val, depth, type_))
 
-    current_indent = '    ' * depth
+    current_indent = INTEND * depth
     result = itertools.chain("{", lines, [current_indent + "}"])
     return '\n'.join(result)
 

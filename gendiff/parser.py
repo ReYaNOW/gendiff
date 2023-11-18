@@ -11,4 +11,4 @@ def parse_data(data: IO, data_format: str) -> dict:
         case 'yaml' | 'yml':
             return yaml.safe_load(data)
         case _:
-            raise ValueError(f'Unsupported file format: {data_format}')
+            raise ValueError(f'Unsupported data format: {data_format}')

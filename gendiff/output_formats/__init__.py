@@ -1,15 +1,15 @@
-from gendiff.output_formats.json_output import out_json
-from gendiff.output_formats.plain import out_plain
-from gendiff.output_formats.stylish import out_stylish
+from gendiff.output_formats.json_output import render_json
+from gendiff.output_formats.plain import render_plain
+from gendiff.output_formats.stylish import render_stylish
 
 
 def generate_output(diff: dict, format_name: str) -> str:
     match format_name:
         case 'stylish':
-            return out_stylish(diff)
+            return render_stylish(diff)
         case 'plain':
-            return out_plain(diff)
+            return render_plain(diff)
         case 'json':
-            return out_json(diff)
+            return render_json(diff)
         case _:
             return 'Wrong format!\nPlease choose from stylish, plain or json'

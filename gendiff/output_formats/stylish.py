@@ -1,6 +1,6 @@
 import itertools
 
-from gendiff.utils import validate_value
+from gendiff.utils import stringify_value
 
 INTEND = '    '
 
@@ -22,7 +22,7 @@ def get_line(key: str, value, depth, type_=None) -> str:
 
 def stylish(current_value, depth):
     if not isinstance(current_value, dict):
-        return validate_value(current_value)
+        return stringify_value(current_value)
 
     lines = []
     for key, key_info in current_value.items():

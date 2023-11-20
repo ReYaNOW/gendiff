@@ -1,4 +1,4 @@
-def validate_value(value, format_name: str = 'stylish') -> str:
+def stringify_value(value, format_name: str = 'stylish') -> str:
     match value:
         case None:
             return 'null'

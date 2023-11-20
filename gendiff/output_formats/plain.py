@@ -1,4 +1,4 @@
-from gendiff.utils import validate_value
+from gendiff.utils import stringify_value
 
 FORMAT_NAME = 'plain'
 
@@ -14,15 +14,15 @@ def plain(diff: dict, curr_prop_path: str = '') -> list:
             case 'nested':
                 result.extend(plain(value, f'{property_name}.'))
             case 'added':
-                val = validate_value(value, FORMAT_NAME)
+                val = stringify_value(value, FORMAT_NAME)
                 result.append(
                     f"Property '{property_name}' was added with value: {val}"
                 )
             case 'deleted':
                 result.append(f"Property '{property_name}' was removed")
             case 'changed':
-                old_val = validate_value(value, FORMAT_NAME)
-                new_val = validate_value(v_info['new_value'], FORMAT_NAME)
+                old_val = stringify_value(value, FORMAT_NAME)
+                new_val = stringify_value(v_info['new_value'], FORMAT_NAME)
                 result.append(
                     f"Property '{property_name}' was updated. "
                     f"From {old_val} to {new_val}"

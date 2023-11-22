@@ -28,7 +28,7 @@ def render_plain(diff: dict) -> str:
                     result.append(render_added(value, property_name))
 
                 case 'deleted':
-                    result.append(render_deleted(property_name))
+                    result.append(f"Property '{property_name}' was removed")
 
                 case 'changed':
                     result.append(render_changed(value, v_info, property_name))
@@ -41,9 +41,6 @@ def render_plain(diff: dict) -> str:
     def render_added(value, property_name):
         val = stringify_value(value)
         return f"Property '{property_name}' was added " f"with value: {val}"
-
-    def render_deleted(property_name):
-        return f"Property '{property_name}' was removed"
 
     def render_changed(value, v_info, property_name):
         old_val = stringify_value(value)

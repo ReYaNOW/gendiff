@@ -35,14 +35,14 @@ def render_plain(diff: dict) -> str:
 
         return result
 
-    def render_nested(val, property_name):
-        return iter_plain(val, f'{property_name}.')
+    def render_nested(value, property_name: str) -> list:
+        return iter_plain(value, f'{property_name}.')
 
-    def render_added(value, property_name):
+    def render_added(value, property_name: str) -> str:
         val = stringify_value(value)
         return f"Property '{property_name}' was added " f"with value: {val}"
 
-    def render_changed(value, v_info, property_name):
+    def render_changed(value, v_info: dict, property_name: str) -> str:
         old_val = stringify_value(value)
         new_val = stringify_value(v_info['new_value'])
         return (

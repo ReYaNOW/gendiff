@@ -3,11 +3,11 @@ from gendiff.output_formats import generate_output
 from gendiff.parser import parse_data
 
 
-def get_extension_from_path(path):
+def get_extension_from_path(path: str) -> str:
     return path.rsplit('.', maxsplit=1)[-1].lower()
 
 
-def get_data_from_file(path):
+def get_data_from_file(path: str) -> dict:
     extension = get_extension_from_path(path)
 
     with open(path) as file:

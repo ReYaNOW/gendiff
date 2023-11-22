@@ -14,7 +14,7 @@ def stringify_value(value) -> str:
             return f'{value}'
 
 
-def generate_line(key: str, value, depth, type_=None) -> str:
+def generate_line(key: str, value, depth: int, type_=None) -> str:
     new_depth = depth + 1
     deep_indent = (INTEND * new_depth)[:-2]
 
@@ -29,7 +29,7 @@ def generate_line(key: str, value, depth, type_=None) -> str:
     return f'{deep_indent}{symbol} {key}: {stylish(value, new_depth)}'
 
 
-def stylish(current_value, depth):
+def stylish(current_value, depth: int) -> str:
     if not isinstance(current_value, dict):
         return stringify_value(current_value)
 

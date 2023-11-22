@@ -1,8 +1,17 @@
 import itertools
 
-from gendiff.utils import stringify_value
 
 INTEND = '    '
+
+
+def stringify_value(value) -> str:
+    match value:
+        case None:
+            return 'null'
+        case bool():
+            return str(value).lower()
+        case _:
+            return f'{value}'
 
 
 def generate_line(key: str, value, depth, type_=None) -> str:

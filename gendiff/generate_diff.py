@@ -1,4 +1,4 @@
-from gendiff.diff_tree import make_diff_tree
+from gendiff.diff_tree import build_diff_tree
 from gendiff.output_formats import generate_output
 from gendiff.parser import parse_data
 
@@ -18,5 +18,5 @@ def generate_diff(path1: str, path2: str, format_name: str = 'stylish') -> str:
     f1_data = get_data_from_file(path1)
     f2_data = get_data_from_file(path2)
 
-    diff = make_diff_tree(f1_data, f2_data)
+    diff = build_diff_tree(f1_data, f2_data)
     return generate_output(diff, format_name)

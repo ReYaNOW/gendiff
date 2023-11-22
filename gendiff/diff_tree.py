@@ -1,4 +1,4 @@
-def make_diff_tree(dict1: dict, dict2: dict) -> dict:
+def build_diff_tree(dict1: dict, dict2: dict) -> dict:
     """
     Compute the difference between two given dictionaries,
     and return a dict of changes made.
@@ -18,7 +18,7 @@ def make_diff_tree(dict1: dict, dict2: dict) -> dict:
 
 def get_diff_with_same_keys(val1, val2):
     if isinstance(val1, dict) and isinstance(val2, dict):
-        return {'type': 'nested', 'value': make_diff_tree(val1, val2)}
+        return {'type': 'nested', 'value': build_diff_tree(val1, val2)}
     if val1 == val2:
-        return {'type': 'kept', 'value': val1}
+        return {'type': 'unchanged', 'value': val1}
     return {'type': 'changed', 'value': val1, 'new_value': val2}

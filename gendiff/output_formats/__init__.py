@@ -1,13 +1,8 @@
-from collections import namedtuple
+from gendiff.consts import FORMATS
 
 from gendiff.output_formats.json import render_json
 from gendiff.output_formats.plain import render_plain
 from gendiff.output_formats.stylish import render_stylish
-
-_FORMAT_VALUES = ('stylish', 'plain', 'json')
-FORMATS = namedtuple('FormatChoices', map(str.upper, _FORMAT_VALUES))(
-    *_FORMAT_VALUES
-)
 
 
 def generate_output(diff_tree: dict, format_name: str) -> str:

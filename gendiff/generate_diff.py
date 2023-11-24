@@ -1,6 +1,7 @@
 from gendiff.diff_tree import build_diff_tree
 from gendiff.output_formats import generate_output
 from gendiff.parser import parse_data
+from gendiff.consts import FORMATS
 
 
 def get_extension_from_path(path: str) -> str:
@@ -14,7 +15,9 @@ def get_data_from_file(path: str) -> dict:
         return parse_data(file, extension)
 
 
-def generate_diff(path1: str, path2: str, format_name: str = 'stylish') -> str:
+def generate_diff(
+    path1: str, path2: str, format_name: str = FORMATS.STYLISH
+) -> str:
     f1_data = get_data_from_file(path1)
     f2_data = get_data_from_file(path2)
 

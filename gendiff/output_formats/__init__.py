@@ -1,4 +1,4 @@
-from gendiff.consts import FORMATS
+from gendiff.output_formats.consts import FORMATS
 
 from gendiff.output_formats.json import render_json
 from gendiff.output_formats.plain import render_plain

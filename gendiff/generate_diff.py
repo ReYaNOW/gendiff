@@ -1,7 +1,7 @@
 from gendiff.diff_tree import build_diff_tree
 from gendiff.output_formats import generate_output
 from gendiff.parser import parse_data
-from gendiff.consts import FORMATS
+from gendiff.output_formats.consts import FORMATS
 
 
 def get_extension_from_path(path: str) -> str:

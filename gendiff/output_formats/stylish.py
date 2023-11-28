@@ -1,7 +1,4 @@
-import itertools
-
-
-INTEND = '    '
+from gendiff.output_formats.consts import INDENT
 
 
 def stringify_value(value) -> str:
@@ -14,6 +11,12 @@ def stringify_value(value) -> str:
             return f'{value}'
 
 
+def validate_key_info(key_info):
+    if not isinstance(key_info, dict) or 'type' not in key_info:
+        return False
+    return True
+
+
 def render_stylish(diff: dict):
     def stylish(current_value, depth: int) -> str:
         if not isinstance(current_value, dict):
@@ -21,7 +24,7 @@ def render_stylish(diff: dict):
 
         lines = []
         for key, key_info in current_value.items():
-            if not isinstance(key_info, dict) or 'type' not in key_info:
+            if not validate_key_info(key_info):
                 lines.append(generate_line(key, key_info, depth))
                 continue
 
@@ -35,13 +38,13 @@ def render_stylish(diff: dict):
             else:
                 lines.append(generate_line(key, val, depth, type_))
 
-        current_indent = INTEND * depth
-        result = itertools.chain("{", lines, [current_indent + "}"])
-        return '\n'.join(result)
+        closing_bracket = f'{INDENT * depth}}}'
+        lines = '\n'.join(lines)
+        return f'{{\n{lines}\n{closing_bracket}'
 
     def generate_line(key: str, value, depth: int, type_=None) -> str:
         new_depth = depth + 1
-        deep_indent = (INTEND * new_depth)[:-2]
+        deep_indent = (INDENT * new_depth)[:-2]
 
         match type_:
             case 'added':

@@ -40,7 +40,7 @@ def render_plain(diff: dict) -> str:
 
     def render_added(value, property_name: str) -> str:
         val = stringify_value(value)
-        return f"Property '{property_name}' was added " f"with value: {val}"
+        return f"Property '{property_name}' was added with value: {val}"
 
     def render_deleted(property_name):
         return f"Property '{property_name}' was removed"

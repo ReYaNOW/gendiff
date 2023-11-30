@@ -6,8 +6,10 @@ from gendiff import generate_diff
 
 
 @pytest.fixture
-def f1_to_f2_format_json(big_file1_json, big_file2_json):
-    return generate_diff(big_file1_json, big_file2_json, format_name='json')
+def f1_to_f2_format_json(nested_file1_json, nested_file2_json):
+    return generate_diff(
+        nested_file1_json, nested_file2_json, format_name='json'
+    )
 
 
 def test_format_json(f1_to_f2_format_json):

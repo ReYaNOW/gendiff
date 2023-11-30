@@ -12,7 +12,7 @@ def stringify_value(value) -> str:
 
 
 def render_stylish(diff: dict):
-    def stylish(current_value, depth: int) -> str:
+    def iter_stylish(current_value, depth: int) -> str:
         if not isinstance(current_value, dict):
             return stringify_value(current_value)
 
@@ -42,6 +42,6 @@ def render_stylish(diff: dict):
     def generate_line(key: str, value, depth: int, symbol: str):
         new_depth = depth + 1
         deep_indent = (INDENT * new_depth)[:-2]
-        return f'{deep_indent}{symbol} {key}: {stylish(value, new_depth)}'
+        return f'{deep_indent}{symbol} {key}: {iter_stylish(value, new_depth)}'
 
-    return stylish(diff, depth=0)
+    return iter_stylish(diff, depth=0)

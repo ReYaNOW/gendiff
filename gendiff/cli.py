@@ -1,5 +1,7 @@
 import argparse
 
+from gendiff.output_formats.consts import FORMATS
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -12,6 +14,7 @@ def parse_args() -> argparse.Namespace:
         '-f',
         '--format',
         default='stylish',
-        help='set format of output (stylish, plain, json), default is stylish',
+        help=f'set format of output ({", ".join(FORMATS)}) ,'
+             f'default is stylish',
     )
     return parser.parse_args()

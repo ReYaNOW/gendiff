@@ -1,20 +1,20 @@
 import pytest
 
-pytest_plugins = [
-    'tests.fixtures.test_files',
-    'tests.fixtures.result_fixtures',
-]
+
+def get_result(result_name):
+    with open(f'tests/fixtures/{result_name}.txt') as file:
+        return file.read()
 
 
 @pytest.fixture
 def f1_to_f2():
-    with open('tests/fixtures/result_flat_f1_to_f2.txt') as file:
+    with open('tests/fixtures/result_flat1.txt') as file:
         return file.read()
 
 
 @pytest.fixture
 def f2_to_f1():
-    with open('tests/fixtures/result_flat_f2_to_f1.txt') as file:
+    with open('tests/fixtures/result_flat2.txt') as file:
         return file.read()
 
 

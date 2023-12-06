@@ -19,12 +19,12 @@ def f2_to_f1():
 
 
 @pytest.fixture
-def f1_to_f2_plain():
-    with open('tests/fixtures/result_f1_to_f2_plain.txt') as file:
+def f1_to_f2_recursive():
+    with open('tests/fixtures/result_recursive.txt') as file:
         return file.read()
 
 
 @pytest.fixture
-def f1_to_f2_recursive():
-    with open('tests/fixtures/result_f1_to_f2_recursive.txt', 'r') as file:
+def f1_to_f2_plain():
+    with open('tests/fixtures/result_plain.txt') as file:
         return file.read()

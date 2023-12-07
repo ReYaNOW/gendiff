@@ -14,28 +14,3 @@ def get_file_ext(file_name):
     else:
         ext = 'json'
     return ext
-
-
-@pytest.fixture
-def file1_json():
-    return 'tests/fixtures/flat1.json'
-
-
-@pytest.fixture
-def file2_json():
-    return 'tests/fixtures/flat2.json'
-
-
-@pytest.fixture
-def nested_file1_json():
-    return 'tests/fixtures/nested1.json'
-
-
-@pytest.fixture
-def nested_file2_json():
-    return 'tests/fixtures/nested2.json'
-
-
-@pytest.fixture
-def nested_file2_yml():
-    return 'tests/fixtures/nested2_yml.yml'

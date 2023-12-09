@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
+description = "Вычислитель отличий – программа, определяющая разницу между двумя структурами данных. Это популярная задача, для решения которой существует множество онлайн-сервисов."
 authors = ["Sergei <reyangood@gmail.com>"]
 readme = "README.md"
 packages = [{include = "gendiff"}]

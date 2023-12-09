@@ -37,7 +37,7 @@ def test_gendiff_nested():
 
 
 def test_gendiff_yml():
-    file_paths = f'tests/fixtures/nested1.json', f'tests/fixtures/nested2.yml'
+    file_paths = 'tests/fixtures/nested1.json', 'tests/fixtures/nested2.yml'
     assert generate_diff(*file_paths) == result_nested_stylish
 
 

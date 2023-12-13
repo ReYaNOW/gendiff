@@ -26,7 +26,7 @@ publish:
 package-install:
 	python3 -m pip install dist/*.whl
 
-package-install:
+package-reinstall:
 	python3 -m pip install dist/*.whl --force-reinstall
 
 bpp:

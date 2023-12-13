@@ -1,3 +1,5 @@
+import pytest
+
 from gendiff import generate_diff
 from gendiff.output_formats.consts import FORMATS
 
@@ -41,7 +43,10 @@ def test_gendiff_yml():
     assert generate_diff(*file_paths) == result_nested_stylish
 
 
-def test_wrong_format():
+def test_exception_message():
     file_paths = get_file_paths('nested1', 'nested2')
-    result = 'Unsupported format!\nPlease choose from stylish, plain, json'
-    assert generate_diff(*file_paths, format_name='avada_kedavra') == result
+    with pytest.raises(
+        ValueError,
+        match=f'Unsupported format!\nPlease choose from {", ".join(FORMATS)}',
+    ):
+        generate_diff(*file_paths, format_name='avada_kedavra')

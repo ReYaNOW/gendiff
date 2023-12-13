@@ -14,6 +14,6 @@ def generate_output(diff_tree: dict, format_name: str) -> str:
         case FORMATS.JSON:
             return render_json(diff_tree)
         case _:
-            return (
+            raise ValueError(
                 f'Unsupported format!\nPlease choose from {", ".join(FORMATS)}'
             )
